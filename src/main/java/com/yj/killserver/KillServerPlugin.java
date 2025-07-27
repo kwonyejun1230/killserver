@@ -1,4 +1,4 @@
-package me.yejunhacker.killserver;
+package com.yj.killserver;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
