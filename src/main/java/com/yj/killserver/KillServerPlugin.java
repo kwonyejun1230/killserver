@@ -1,4 +1,4 @@
-package com.yj.killserver;
+package me.yejunhacker.killserver;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -21,32 +21,30 @@ public class KillServerPlugin extends JavaPlugin {
                     }
 
                     if (shutdownTask != null) {
-                        sender.sendMessage("§e이미 종료 카운트다운이 진행 중입니다.");
+                        sender.sendMessage("§e이미 재시작 카운트다운이 진행 중입니다.");
                         return true;
                     }
 
-                    sender.sendMessage("§c서버 종료까지 30초...");
+                    sender.sendMessage("§c서버 재시작까지 10초...");
                     shutdownTask = new BukkitRunnable() {
-                        int countdown = 30;
+                        int countdown = 10;
 
                         @Override
                         public void run() {
                             if (countdown == 0) {
-                                Bukkit.broadcastMessage("§c서버를 종료합니다.");
+                                Bukkit.broadcastMessage("§c서버를 재시작합니다.");
                                 Bukkit.getServer().shutdown();
                                 shutdownTask = null;
                                 cancel();
                                 return;
                             }
 
-                            if (countdown <= 5 || countdown % 5 == 0) {
-                                Bukkit.broadcastMessage("§e서버 종료까지 " + countdown + "초...");
-                            }
-
+                            // 매초마다 종료 카운트다운 메시지 출력
+                            Bukkit.broadcastMessage("§e서버 재시작까지 " + countdown + "초...");
                             countdown--;
                         }
                     };
-                    shutdownTask.runTaskTimer(this, 0L, 20L); // 20 ticks = 1 second
+                    shutdownTask.runTaskTimer(this, 0L, 20L); // 20 ticks = 1초
                     return true;
 
                 } else if (args[0].equalsIgnoreCase("cancel")) {
@@ -58,9 +56,9 @@ public class KillServerPlugin extends JavaPlugin {
                     if (shutdownTask != null) {
                         shutdownTask.cancel();
                         shutdownTask = null;
-                        Bukkit.broadcastMessage("§a서버 종료가 취소되었습니다.");
+                        Bukkit.broadcastMessage("§a서버 재시작이 취소되었습니다.");
                     } else {
-                        sender.sendMessage("§e진행 중인 종료 작업이 없습니다.");
+                        sender.sendMessage("§e진행 중인 재시작 작업이 없습니다.");
                     }
                     return true;
                 }
