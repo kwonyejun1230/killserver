@@ -1,0 +1,13 @@
+name: KillServer
+version: 1.0
+main: com.yj.killserver.KillServerPlugin
+api-version: 1.21
+commands:
+  kill:
+    description: 서버를 종료하거나 플레이어를 죽입니다.
+    usage: /kill <target>
+    permission: killserver.kill
+permissions:
+  killserver.kill:
+    description: 서버 종료 권한
+    default: op
