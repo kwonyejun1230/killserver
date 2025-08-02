@@ -39,12 +39,11 @@ public class KillServerPlugin extends JavaPlugin {
                                 return;
                             }
 
-                            // 매초마다 종료 카운트다운 메시지 출력
                             Bukkit.broadcastMessage("§e서버 재시작까지 " + countdown + "초...");
                             countdown--;
                         }
                     };
-                    shutdownTask.runTaskTimer(this, 0L, 20L); // 20 ticks = 1초
+                    shutdownTask.runTaskTimer(this, 0L, 20L);
                     return true;
 
                 } else if (args[0].equalsIgnoreCase("cancel")) {
